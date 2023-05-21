@@ -4,28 +4,20 @@ namespace DIExercise
 {
     public class Loan
     {
-        public bool Get()
+        
+        
+        
+        public bool Get(string name, string pesel, string birthYearStr, string salaryStr, string requestedLoanAmountStr)
         {
             bool isLoanGranted;
-            Console.Out.WriteLine("Podaj imię i nazwisko:");
-            string name = Console.ReadLine();
-
-            Console.Out.WriteLine("Podaj pesel:");
-            string pesel = Console.ReadLine();
-
-            Console.Out.WriteLine("Podaj rok urodzenia:");
-            string birthYearStr = Console.ReadLine();
-
-            Console.Out.WriteLine("Podaj zarobki:");
-            string salaryStr = Console.ReadLine();
-
-            Console.Out.WriteLine("Podaj kwotę pożyczki:");
-            string requestedLoanAmountStr = Console.ReadLine();
-
             int birthYear;
-            if (int.TryParse(birthYearStr, out birthYear))
+            if (!int.TryParse(birthYearStr, out birthYear))
             {
-                var age = DateTime.Now.Year - birthYear;
+                isLoanGranted = false;
+                Console.Out.WriteLine("Niepoprawny rok urodzenia");
+                return isLoanGranted;
+            }
+            var age = DateTime.Now.Year - birthYear;
                 if (age >= 18)
                 {
                     int requestedLoanAmount, salary = 0;
@@ -85,14 +77,9 @@ namespace DIExercise
                     isLoanGranted = false;
                     Console.Out.WriteLine("Jesteś za młody");
                 }
-            }
-            else
-            {
-                isLoanGranted = false;
-                Console.Out.WriteLine("Niepoprawny rok urodzenia");
-            }
 
-            return isLoanGranted;
+
+                return isLoanGranted;
         }
     }
 }
